@@ -1,8 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 :root {
     --font-main: "Outfit", sans-serif;
+    --font-secondary: "Nunito", sans-serif;
     --primary-color: #270c42;
+    --secondary-color: #552782;
+    --form-border: #f1e9f9;
 }
 
 *,
@@ -22,6 +26,7 @@ footer {
 
 body {
     font-family: var(--font-main);
+    color: var(--primary-color);
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
@@ -49,22 +54,84 @@ nav {
 
 i {
     font-size: 1.4em;
-    color: #552782;
+    color: var(--secondary-color);
 }
 
 a  {
     text-decoration: none;
 }
 
+.link-btn {
+    color: var(--secondary-color);
+}
+
+.link-btn:hover {
+    text-decoration: underline;
+}
+
+/*  main  */
+
+main {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid plum;
+    padding: .5em;
+}
+
+/*  create post  */
+
+.create-post {
+    border: 1px solid #ff9d26;
+    border-radius: 15px;
+    padding: 1em;
+    display: grid;
+    gap: .5em;
+}
+
+.create-post button {
+    justify-self: end;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.avatar img {
+    width: 40px;
+    display: block;
+}
+
+.post-content {
+    font-family: var(--font-secondary);
+}
+
+.post-btn {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff9d26;
+    font-weight: 500;
+    font-family: var(--font-main);
+}
+
 
 /*  forms  */
 
 .form-container { 
-    border: 2px solid #f1e9f9;
-    margin-top: 4em;
-    max-width: 500px;
+    border: 2px solid var(--form-border);
+    border-radius: 15px;
+    margin: 5em auto;
+    max-width: 400px;
     padding: 2em 3em;
-}    
+}  
+
+form label {
+    font-size: .9em;
+    margin-top: .8em;
+}
 
 form {
     display: flex;
@@ -75,23 +142,64 @@ form {
 
 form input {
     font-family: var(--font-main);
-    border: 2px solid #f1e9f9;
+    border: none;
+    border: 2px solid var(--form-border);
     border-radius: 5px;
     font-weight: 300;
     width: 100%;
-    padding: 5px 10px;
+    padding: 7px 10px;
     letter-spacing: .8px;
     font-size: .8em;
 }
 
 .form-btn {
     font-family: var(--font-main);
-    margin-top: 1em;
+    color: var(--primary-color);
+    cursor: pointer;
+    margin-top: 2em;
     border-radius: 15px;
-    padding: 5px;
-    font-size: 1em;
-    font-weight: 500;
+    border: 2px solid var(--primary-color);
+    background-color: #f4edfa;
+    padding: 8px;
+    font-size: 1.05em;
+    font-weight: 600;
+    letter-spacing: .8px;
+    transition-duration: 0.5s;
+}
 
+.form-btn:hover {
+    background-color: var(--primary-color);
+    color: #f4edfa;
+}
+
+.form-btn:active {
+    background-color: #f4edfa;
+    color: var(--primary-color);
+}
+
+.form-btn i {
+    animation: check 0.4s ease;
+}
+
+@keyframes check {
+    0% {
+        transform: scale(0);
+    }
+
+    70% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.page-switch {
+    font-size: .9em;
+    display: grid;
+    text-align: center;
+    margin-top: 1em;
 }
 
 /*  footer  */
