@@ -31,18 +31,75 @@
                     <img src="assets/images/avatar.png" alt="">
                 </div>
                 <div class="post-author">
-                    <h4>Jane</h4>
+                    <h4>Johnny</h4>
+                    <span class="post-date">04.11.2026</span>
                 </div>
             </div>
-            <div class="post-content">
-                <p>Its hard to make that page! Yahoo.</p>
-            </div>
+            <form class="new-post-form">
+                <label for="post-title"></label>  
+                    <input 
+                    type="text"
+                    id="post-title"
+                    name="title"
+                    placeholder="Maybe title..."
+                    aria-label="Write a title"
+                    >
+                <label for="post-pody"></label> 
+                    <textarea
+                    id="post-body"
+                    name="body"
+                    placeholder="What's on your mind?"
+                    rows="4"
+              ></textarea>
+                </form>
+             </form>
+                
             <button class="post-btn">Post</button>
         </section>
-        <section class="posts-container"></section>
 
-        <section class="posts-container"></section>
-        
+        <section class="posts-container">
+            <div class="post-header">
+                <div class="avatar">
+                    <img src="assets/images/avatar.png" alt="">
+                </div>
+                <div class="post-author">
+                    <h4>Jane</h4>
+                    <span class="post-date">04.11.2026</span>
+                </div>
+            
+                <button class="delete-post">Delete</button>
+            </div>
+            <div class="post-content">
+                <div class="post-img">
+                    <img src="assets/images/robot.jpg" alt="Robot performing ordinary human job.">
+                </div>
+                <h4 class="post-title">This is how I spend my afternoon</h4>
+                <p>I am not a robot. Ha ha haa..😅</p>
+            </div>
+            <div class="post-actions">
+                <button type="button" class="heart-btn">
+                    <img src="assets/icon/heart.png" alt="">
+                    <p class="action-count-like">105</p>
+                </button>
+                <button type="button" class="comment-btn">
+                    <img src="assets/icon/comment.png" alt="">
+                    <p class="action-count-comment">105</p>
+                </button>
+            </div>
+            <div class="comment-post" hidden>
+                <form class="write-comment">
+                    <input 
+                    type="text"
+                    name="comment"
+                    placeholder="Write a comment..."
+                    aria-label="Write a comment"
+                    >
+
+                </form>
+                <button class="post-btn">Post</button>
+            </div>
+        </section>
+
     </main>
 
     <footer>

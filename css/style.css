@@ -81,8 +81,10 @@ main {
 
 /*  create post  */
 
+.posts-container,
 .create-post {
     border: 1px solid #ff9d26;
+    margin-top: 1.5em;
     border-radius: 15px;
     padding: 1em;
     display: grid;
@@ -91,6 +93,11 @@ main {
 
 .create-post button {
     justify-self: end;
+}
+
+.new-post-form {
+    display: grid;
+    gap: 0;
 }
 
 .post-header {
@@ -104,9 +111,46 @@ main {
     display: block;
 }
 
+.post-date {
+    font-size: .7em;
+    font-weight: 300;
+
+}
+
+.delete-post {
+    font-size: .8em;
+    font-weight: 500;
+    margin-left: auto;
+    align-self: center;
+    padding: 3px 8px;
+    background-color: transparent;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 15px;
+    transition-duration: 0.5s;
+}
+
+.delete-post:hover {
+    background-color: #ae2012;
+    border: 1px solid #ae2012;
+    color: white;
+}
+
 .post-content {
     font-family: var(--font-secondary);
 }
+
+.post-img {
+     width: 100%;  
+     margin: .5em 0 .5em 0;
+}
+
+.post-img img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 
 .post-btn {
     padding: 6px 14px;
@@ -115,6 +159,50 @@ main {
     background-color: #ff9d26;
     font-weight: 500;
     font-family: var(--font-main);
+}
+
+.post-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .8em;
+}
+
+.post-actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.heart-btn img {
+    width: 25px;
+}
+
+.comment-btn img {
+    width: 32px;
+}
+
+.heart-btn,
+.comment-btn {
+    display: flex;
+    gap: .3em;
+}
+
+.comment-post {
+    width: 100%;
+    display: grid;
+    gap: .5em;
+}
+
+.comment-post button {
+    justify-self: flex-end;
+}
+
+[hidden] {
+    display: none;
 }
 
 
@@ -140,6 +228,7 @@ form {
 
 }
 
+textarea,
 form input {
     font-family: var(--font-main);
     border: none;
