@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Home | soSocial</title>
 </head>
+
 <body>
     <header>
         <div class="logo">soSocial.</div>
@@ -36,24 +38,13 @@
                 </div>
             </div>
             <form class="new-post-form">
-                <label for="post-title"></label>  
-                    <input 
-                    type="text"
-                    id="post-title"
-                    name="title"
-                    placeholder="Maybe title..."
-                    aria-label="Write a title"
-                    >
-                <label for="post-pody"></label> 
-                    <textarea
-                    id="post-body"
-                    name="body"
-                    placeholder="What's on your mind?"
-                    rows="4"
-              ></textarea>
-                </form>
-             </form>
-                
+                <label for="post-title"></label>
+                <input type="text" id="post-title" name="title" placeholder="Maybe title..." aria-label="Write a title">
+                <label for="post-pody"></label>
+                <textarea id="post-body" name="body" placeholder="What's on your mind?" rows="4"></textarea>
+            </form>
+            </form>
+
             <button class="post-btn">Post</button>
         </section>
 
@@ -66,7 +57,7 @@
                     <h4>Jane</h4>
                     <span class="post-date">04.11.2026</span>
                 </div>
-            
+
                 <button class="delete-post">Delete</button>
             </div>
             <div class="post-content">
@@ -77,7 +68,10 @@
                 <p>I am not a robot. Ha ha haa..😅</p>
             </div>
             <div class="post-actions">
-                <button type="button" class="heart-btn">
+                <a href="post/index.html" class="view-post">
+                    <img src="assets/icon/eye.png" alt="">
+                </a>
+                <button type="button" class="like-btn">
                     <img src="assets/icon/heart.png" alt="">
                     <p class="action-count-like">105</p>
                 </button>
@@ -88,12 +82,7 @@
             </div>
             <div class="comment-post" hidden>
                 <form class="write-comment">
-                    <input 
-                    type="text"
-                    name="comment"
-                    placeholder="Write a comment..."
-                    aria-label="Write a comment"
-                    >
+                    <input type="text" name="comment" placeholder="Write a comment..." aria-label="Write a comment">
 
                 </form>
                 <button class="post-btn">Post</button>
@@ -110,4 +99,5 @@
         <div class="copyright">&copy; 2026 soSocial.</div>
     </footer>
 </body>
+
 </html>
