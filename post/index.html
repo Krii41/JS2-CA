@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read posts, explore reactions, and join the conversations on soSocial.">
+    <meta name="author" content="Urve Kriiva">
     <script src="https://kit.fontawesome.com/63d815684c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
     <title>Post | soSocial</title>
@@ -13,8 +15,24 @@
     <header>
         <div class="logo">soSocial.</div>
         <nav>
+            <div class="search">
+                <input 
+                type="search"
+                id="search-input"
+                placeholder="Search posts..."
+                aria-label="Search posts"
+                >
+                <button
+                type="button"
+                class="search-toggle"
+                aria-label="Open search"
+                aria-expanded="false"
+                aria-controls="search-input"
+                >
+                <i class="fa-vellum fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
             <a href="../index.html"><i class="fa-vellum fa-solid fa-house"></i></a>
-            <a href="#"><i class="fa-vellum fa-solid fa-magnifying-glass"></i></a>
             <a href="../login/index.html" id="login-link">
                 <i class="fa-vellum fa-solid fa-circle-user"></i>
             </a>
@@ -31,7 +49,8 @@
                 <p>Back to Feed</p>
             </a>
         </div>
-        <section class="posts-container">
+
+        <div class="post-container">
             <div class="post-header">
                 <div class="avatar">
                     <img src="../assets/images/avatar.png" alt="">
@@ -51,14 +70,24 @@
                 <p class="post-body">I am not a robot. Ha ha haa..😅</p>
             </div>
             <div class="post-actions">
-                <button type="button" class="like-btn">
-                    <img src="../assets/icon/heart.png" alt="">
-                    <p class="action-count-like">105</p>
-                </button>
-                <button type="button" class="comment-btn">
-                    <img src="../assets/icon/comment.png" alt="">
-                    <p class="action-count-comment">105</p>
-                </button>
+                <div class="post-actions-left">
+                    <a href="post/index.html" class="view-post">
+                        <img src="../assets/icon/eye.png" alt="">
+                    </a>
+                    <button type="button" class="edit-btn">
+                        <img src="../assets/icon/edit.png" alt="">
+                    </button>
+                </div>
+                <div class="post-actions-right">
+                    <button type="button" class="like-btn">
+                        <img src="../assets/icon/heart.png" alt="">
+                        <p class="action-count-like">105</p>
+                    </button>
+                    <button type="button" class="comment-btn">
+                        <img src="../assets/icon/comment.png" alt="">
+                        <p class="action-count-comment">105</p>
+                    </button>
+                </div>
             </div>
             <div class="comment-post">
                 <form class="write-comment">
@@ -67,27 +96,27 @@
                 </form>
                 <button class="post-btn">Post</button>
             </div>
-        </section>
+        </div>
 
-        <span class="comments-title">Comments</span>
-        <p class="no-comments">It's a little quiet here... Be the first to comment!</p>
+            <span class="comments-title">Comments</span>
+            <p class="no-comments">It's a little quiet here... Be the first to comment!</p>
 
-        <section class="comments-list">
-            <div class="existing-comment">
-                <div class="post-header">
-                    <div class="avatar">
-                        <img src="../assets/images/avatar.png" alt="">
+            <section class="comments-list">
+                <div class="existing-comment">
+                    <div class="post-header">
+                        <div class="avatar">
+                            <img src="../assets/images/avatar.png" alt="">
+                        </div>
+                        <div class="post-author">
+                            <h4>Johnny</h4>
+                            <span class="post-date">04.11.2026</span>
+                        </div>
                     </div>
-                    <div class="post-author">
-                        <h4>Johnny</h4>
-                        <span class="post-date">04.11.2026</span>
+                    <div class="post-body">
+                        <p>This picture is awsome. You are the best!</p>
                     </div>
                 </div>
-                <div class="post-body">
-                    <p>This picture is awsome. You are the best!</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
     </main>
 
