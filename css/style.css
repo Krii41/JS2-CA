@@ -29,6 +29,12 @@ footer {
     margin: 2.5em auto;
 }
 
+input,
+textarea,
+select {
+    font-size: 1rem;
+}
+
 body {
     font-family: var(--font-main);
     color: var(--primary-color);
