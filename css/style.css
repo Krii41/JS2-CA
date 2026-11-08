@@ -214,6 +214,7 @@ main {
 
 .post-btn {
     background-color: var(--accent-color);
+    color: var(--primary-color);
 }
 
 .follow-btn {
@@ -267,6 +268,11 @@ main {
 .comment-btn {
     display: flex;
     gap: .3em;
+}
+
+.action-count-like,
+.action-count-comment {
+    color: var(--primary-color);
 }
 
 .comment-post {
