@@ -121,6 +121,12 @@ a {
     text-decoration: underline;
 }
 
+.logout-btn  {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
 /*  main  */
 
 main {

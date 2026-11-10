@@ -1,0 +1,21 @@
+import { getAccessToken } from "../utils/storage.js";
+import { removeAccessToken } from "../utils/storage.js";
+
+export function setupNavigation() {
+    const loginLink = document.querySelector("#login-link");
+    const profileLink = document.querySelector("#profile-link");
+    const logoutBtn = document.querySelector("#logout-btn");
+
+    const token = getAccessToken("accessToken");
+
+    loginLink.hidden = Boolean(token);
+    profileLink.hidden = !token;
+    logoutBtn.hidden = !token;
+
+    logoutBtn.addEventListener("click", handleLogout);
+}
+
+function handleLogout() {
+    removeAccessToken();
+    window.location.href = "/login/index.html";
+}

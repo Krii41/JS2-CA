@@ -1,4 +1,5 @@
 import { registerUser } from "../api/register.js";
+import { setupNavigation } from "../components/navigation.js";
 
 const registerForm = document.querySelector("#register-form");
 
@@ -25,3 +26,5 @@ async function registerFormSubmit(e) {
 }
 
 registerForm.addEventListener("submit", registerFormSubmit);
+
+setupNavigation();

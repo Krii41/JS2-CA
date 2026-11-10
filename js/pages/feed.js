@@ -1,1 +1,3 @@
-console.log("Nice evening");
+import { setupNavigation } from "../components/navigation.js";
+
+setupNavigation();
