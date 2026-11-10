@@ -69,8 +69,9 @@
             <button class="post-btn">Post</button>
         </section>
 
-       <section class="posts-container">
-        <div class="post-container">
+       <section class="posts-container" id="posts-container">
+
+        <div class="post-container" id="post-container">
             <div class="post-header">
                 <div class="avatar">
                     <img src="assets/images/avatar.png" alt="">
@@ -79,7 +80,6 @@
                     <h4>Jane</h4>
                     <span class="post-date">04.11.2026</span>
                 </div>
-
                 <button class="delete-post">Delete</button>
             </div>
             <div class="post-content">
@@ -89,6 +89,7 @@
                 <h4 class="post-title">This is how I spend my afternoon</h4>
                 <p>I am not a robot. Ha ha haa..😅</p>
             </div>
+
             <div class="post-actions">
                 <div class="post-actions-left">
                     <a href="post/index.html" class="view-post">
@@ -109,6 +110,7 @@
                     </button>
                 </div>
             </div>
+
             <div class="comment-post" hidden>
                 <form class="write-comment">
                     <input type="text" name="comment" placeholder="Write a comment..." aria-label="Write a comment">
@@ -117,54 +119,8 @@
                 <button class="post-btn">Post</button>
             </div>
         </div>
-        <div class="post-container">
-            <div class="post-header">
-                <div class="avatar">
-                    <img src="assets/images/avatar.png" alt="">
-                </div>
-                <div class="post-author">
-                    <h4>Jane</h4>
-                    <span class="post-date">04.11.2026</span>
-                </div>
 
-                <button class="delete-post">Delete</button>
-            </div>
-            <div class="post-content">
-                <div class="post-img">
-                    <img src="assets/images/painting.jpg" alt="Robot performing ordinary human job.">
-                </div>
-                <h4 class="post-title">Something colorful</h4>
-                <p>Still not a robot. Ha ha haa..😅</p>
-            </div>
-            <div class="post-actions">
-                <div class="post-actions-left">
-                    <a href="post/index.html" class="view-post">
-                        <img src="assets/icon/eye.png" alt="">
-                    </a>
-                    <button type="button" class="edit-btn">
-                        <img src="assets/icon/edit.png" alt="">
-                    </button>
-                </div>
-                <div class="post-actions-right">
-                    <button type="button" class="like-btn">
-                        <img src="assets/icon/heart.png" alt="">
-                        <p class="action-count-like">105</p>
-                    </button>
-                    <button type="button" class="comment-btn">
-                        <img src="assets/icon/comment.png" alt="">
-                        <p class="action-count-comment">105</p>
-                    </button>
-                </div>
-            </div>
-            <div class="comment-post" hidden>
-                <form class="write-comment">
-                    <input type="text" name="comment" placeholder="Write a comment..." aria-label="Write a comment">
-
-                </form>
-                <button class="post-btn">Post</button>
-            </div>
-        </div>
-       </section>
+       
 
     </main>
 

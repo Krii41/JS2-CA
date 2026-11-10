@@ -203,6 +203,7 @@ main {
 
 .post-content {
     font-family: var(--font-secondary);
+    overflow-wrap: anywhere;
 }
 
 .post-img {
