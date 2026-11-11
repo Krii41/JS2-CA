@@ -1,4 +1,4 @@
-export function createPostCard(post) {
+export function createPostCard(post, isSinglePost = false) {
     const postContainer = document.createElement("div");
     postContainer.classList.add("post-container");
     postContainer.dataset.postId = post.id;
@@ -6,13 +6,20 @@ export function createPostCard(post) {
     postContainer.append(
         createPostHeader(post),
         createPostContent(post),
-        createPostActions(post)
+        createPostActions(post, isSinglePost)
     );
     
     return postContainer;
 }
 
+// help with ai to figure out the file path
+const assetsPath = window.location.pathname.includes("/post/")
+  ? "../assets/icon/"
+  : "assets/icon/";
+
 function createPostHeader(post) {
+    const loggedInUser = localStorage.getItem("username");
+
     const postHeader = document.createElement("div");
     postHeader.classList.add("post-header");
 
@@ -42,7 +49,11 @@ function createPostHeader(post) {
     deleteBtn.textContent = "Delete";
     deleteBtn.type = "button";
 
-    postHeader.append(avatar, postAuthor, deleteBtn);
+    postHeader.append(avatar, postAuthor);
+
+    if (loggedInUser && loggedInUser === post.author?.name) {
+        postHeader.appendChild(deleteBtn);
+    }
 
     return postHeader;
 }
@@ -76,7 +87,7 @@ function createPostContent(post) {
     return postContent;
 }
 
-function createPostActions(post) {
+function createPostActions(post, isSinglePost) {
     const postActions = document.createElement("div");
     postActions.classList.add("post-actions");
 
@@ -93,6 +104,7 @@ function createPostActions(post) {
     const viewIcon = document.createElement("img");
     viewIcon.src = "assets/icon/eye.png";
     viewIcon.alt = "View post";
+    viewIcon.src = `${assetsPath}eye.png`;
 
     viewPost.appendChild(viewIcon);
 
@@ -103,10 +115,14 @@ function createPostActions(post) {
     const editIcon = document.createElement("img");
     editIcon.src = "assets/icon/edit.png";
     editIcon.alt = "Edit post";
+    editIcon.src = `${assetsPath}edit.png`;
 
     editBtn.appendChild(editIcon);
-
-    postActionsLeft.append(viewPost, editBtn);
+    
+    if (!isSinglePost) {
+        postActionsLeft.appendChild(viewPost);
+    }
+    postActionsLeft.appendChild(editBtn);
 
     const likeBtn = document.createElement("button");
     likeBtn.classList.add("like-btn");
@@ -115,6 +131,7 @@ function createPostActions(post) {
     const likeIcon = document.createElement("img");
     likeIcon.src = "assets/icon/heart.png";
     likeIcon.alt = "";
+    likeIcon.src = `${assetsPath}heart.png`;
 
     const likeCount = document.createElement("p");
     likeCount.classList.add("action-count-like");
@@ -130,6 +147,7 @@ function createPostActions(post) {
     const commentIcon = document.createElement("img");
     commentIcon.src = "assets/icon/comment.png";
     commentIcon.alt = "";
+    commentIcon.src = `${assetsPath}comment.png`;
 
     const commentCount = document.createElement("p");
     commentCount.classList.add("action-count-comment");

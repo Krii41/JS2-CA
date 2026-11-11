@@ -136,9 +136,14 @@ main {
     padding: .5em;
 }
 
+.error-message {
+    text-align: center;
+    font-family: var(--font-secondary);
+}
+
 /*  create post  */
 
-.comments-list,
+.existing-comment,
 .post-container,
 .create-post {
     margin-top: 1.5em;
@@ -148,7 +153,7 @@ main {
     gap: .5em;
 }
 
-.comments-list,
+.existing-comment,
 .post-container {
     border: 1px solid var(--main-border);
 }
@@ -174,7 +179,10 @@ main {
 
 .avatar img {
     width: 40px;
+    height: 40px;
     display: block;
+    border-radius: 50px;
+    object-fit: cover;
 }
 
 .post-date {

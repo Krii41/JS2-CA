@@ -15,6 +15,7 @@ async function loginFormSubmit(e) {
 
         const accessToken = result.data.accessToken;
         saveAccessToken("accessToken", accessToken);
+        localStorage.setItem("username", result.data.name);
 
         window.location.href = "../index.html";
     } catch (error) {

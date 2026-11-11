@@ -17,5 +17,6 @@ export function setupNavigation() {
 
 function handleLogout() {
     removeAccessToken();
+    localStorage.removeItem("username");
     window.location.href = "/login/index.html";
 }
