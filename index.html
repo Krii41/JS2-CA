@@ -16,20 +16,10 @@
         <div class="logo">soSocial.</div>
         <nav>
             <div class="search">
-                <input 
-                type="search"
-                id="search-input"
-                placeholder="Search posts..."
-                aria-label="Search posts"
-                >
-                <button
-                type="button"
-                class="search-toggle"
-                aria-label="Open search"
-                aria-expanded="false"
-                aria-controls="search-input"
-                >
-                <i class="fa-vellum fa-solid fa-magnifying-glass"></i>
+                <input type="search" id="search-input" placeholder="Search posts..." aria-label="Search posts">
+                <button type="button" class="search-toggle" aria-label="Open search" aria-expanded="false"
+                    aria-controls="search-input">
+                    <i class="fa-vellum fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
             <a href="./index.html"><i class="fa-vellum fa-solid fa-house"></i></a>
@@ -59,20 +49,24 @@
                 </div>
             </div>
             <form class="new-post-form">
+                <label for="post-image"></label>
+                <input type="url" id="post-image" name="media" placeholder="https://example.com/image.jpg" />
+
                 <label for="post-title"></label>
                 <input type="text" id="post-title" name="title" placeholder="Maybe title..." aria-label="Write a title">
-                <label for="post-pody"></label>
+
+                <label for="post-body"></label>
                 <textarea id="post-body" name="body" placeholder="What's on your mind?" rows="4"></textarea>
-            </form>
+
+                <button type="submit" class="post-btn">Post</button>
             </form>
 
-            <button class="post-btn">Post</button>
         </section>
 
-       <section class="posts-container" id="posts-container">
+        <section class="posts-container" id="posts-container">
 
-        <div class="post-container" id="post-container">
-      <!--       <div class="post-header">
+            <div class="post-container" id="post-container">
+                <!--       <div class="post-header">
                 <div class="avatar">
                     <img src="assets/images/avatar.png" alt="">
                 </div>
@@ -118,9 +112,9 @@
                 </form>
                 <button class="post-btn">Post</button>
             </div> -->
-        </div>
+            </div>
 
-       
+
 
     </main>
 

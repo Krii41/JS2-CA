@@ -164,6 +164,7 @@ main {
 
 .create-post button {
     justify-self: end;
+    margin-top: 1em;
 }
 
 .new-post-form {

@@ -1,5 +1,6 @@
 import { getAccessToken } from "../utils/storage.js";
 
+
 const BASE_URL = "https://v2.api.noroff.dev";
 const POSTS_URL = `${BASE_URL}/social/posts?_author=true`;
 
@@ -44,6 +45,53 @@ export async function fetchPostById(id) {
 
     if (!response.ok) {
         throw new Error("Failed to fetch post");
+    }
+
+    return result.data;
+}
+
+export async function createPost(postData) {
+    const accessToken = getAccessToken("accessToken");
+
+    const response = await fetch(`${BASE_URL}/social/posts`, 
+    { 
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "X-Noroff-API-Key": NOROFF_API_KEY,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(result.errors?.[0]?.message || "Failed to create post");
+    }
+
+    return result.data;
+
+}
+
+export async function editPost(postId, postData) {
+    const accessToken = getAccessToken("accessToken");
+
+    const response = await fetch(`${BASE_URL}/social/posts/${postId}`, 
+    {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "X-Noroff-API-Key": NOROFF_API_KEY,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(result.errors?.[0]?.message || "Failed to update post");
     }
 
     return result.data;

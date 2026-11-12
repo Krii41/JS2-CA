@@ -1,21 +1,23 @@
+import { editPost } from "../api/posts.js";
+
 export function createPostCard(post, isSinglePost = false) {
     const postContainer = document.createElement("div");
     postContainer.classList.add("post-container");
     postContainer.dataset.postId = post.id;
-    
+
     postContainer.append(
         createPostHeader(post),
         createPostContent(post),
         createPostActions(post, isSinglePost)
     );
-    
+
     return postContainer;
 }
 
 // help with ai to figure out the file path
 const assetsPath = window.location.pathname.includes("/post/")
-  ? "../assets/icon/"
-  : "assets/icon/";
+    ? "../assets/icon/"
+    : "assets/icon/";
 
 function createPostHeader(post) {
     const loggedInUser = localStorage.getItem("username");
@@ -70,6 +72,7 @@ function createPostContent(post) {
     postTitle.textContent = post.title;
 
     const postBody = document.createElement("p");
+    postBody.classList.add("post-body");
     postBody.textContent = post.body || "";
 
     if (post.media?.url) {
@@ -77,7 +80,7 @@ function createPostContent(post) {
 
         image.src = post.media?.url;
         image.alt = post.media?.alt || post.title;
-        
+
         postImg.appendChild(image);
         postContent.appendChild(postImg);
     }
@@ -88,6 +91,9 @@ function createPostContent(post) {
 }
 
 function createPostActions(post, isSinglePost) {
+    const loggedInUser = localStorage.getItem("username");
+    const isOwner = loggedInUser && loggedInUser === post.author?.name;
+
     const postActions = document.createElement("div");
     postActions.classList.add("post-actions");
 
@@ -118,11 +124,56 @@ function createPostActions(post, isSinglePost) {
     editIcon.src = `${assetsPath}edit.png`;
 
     editBtn.appendChild(editIcon);
-    
+
     if (!isSinglePost) {
         postActionsLeft.appendChild(viewPost);
     }
-    postActionsLeft.appendChild(editBtn);
+
+    if (isOwner) {
+        postActionsLeft.appendChild(editBtn);
+    }
+
+    editBtn.addEventListener("click", () => {
+        const postCard = editBtn.closest(".post-container");
+        
+        const title = postCard.querySelector(".post-title");
+        const body = postCard.querySelector(".post-body");
+
+        title.contentEditable = "true";
+        body.contentEditable = "true";
+
+        title.focus();
+
+        const saveBtn = document.createElement("button");
+        saveBtn.type = "button";
+        saveBtn.textContent = "Save";
+        saveBtn.classList.add("save-btn");
+
+        editBtn.after(saveBtn);
+        editBtn.hidden = true;
+
+        saveBtn.addEventListener("click", async () => {
+            const updateData = {
+                title: title.textContent.trim(),
+                body: body.textContent.trim(),
+            };
+
+            try {
+                await editPost(post.id, updateData);
+
+                title.contentEditable = "false";
+                body.contentEditable = "false";
+
+                saveBtn.remove();
+                editBtn.hidden = false;
+
+                alert("Post updated successfully!");
+            } catch (error) {
+                console.error(error);
+                alert("Unable to update post");
+            }
+        });
+    })
 
     const likeBtn = document.createElement("button");
     likeBtn.classList.add("like-btn");
@@ -159,6 +210,6 @@ function createPostActions(post, isSinglePost) {
     postActionsRight.append(likeBtn, commentBtn);
 
     postActions.append(postActionsLeft, postActionsRight);
-    
+
     return postActions;
 }
