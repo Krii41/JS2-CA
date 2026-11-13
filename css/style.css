@@ -81,6 +81,10 @@ a {
     text-decoration: none;
 }
 
+.post-author a {
+    color: var(--primary-color);
+}
+
 .search {
     display: flex;
     align-self: center;
@@ -356,6 +360,7 @@ main {
 /*   profile page   */
 
 .profile-header {
+    margin-top: 1.5em;
     display: flex;
     justify-content: space-between;
 }
@@ -374,6 +379,7 @@ main {
 
 .profile img {
     width: 6em;
+    height: 6em;
     display: block;
     border-radius: 50px;
 }

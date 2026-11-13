@@ -39,10 +39,19 @@
             <a href="../profile/index.html" id="profile-link" hidden>
                 <i class="fa-vellum fa-solid fa-user"></i>
             </a>
+            <button type="button" class="logout-btn" id="logout-btn" hidden>
+                <i class="fa-vellum fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
         </nav>
     </header>
 
     <main>
+        <div class="return-container">
+            <a href="../index.html" class="return-to-feed">
+                <i class="fa-vellum fa-solid fa-arrow-left fa-width-auto"></i>
+                <p>Back to Feed</p>
+            </a>
+        </div>
         <div class="profile-header">
             <h1>My Profile</h1>
             <div>
@@ -54,118 +63,28 @@
               <div class="avatar profile">
                 <img src="../assets/images/smile.png" alt="">
               </div>
-              <h2>Jane Doe</h2>
-              <p>myemail@something.com</p>
+              <h2></h2>
+              <p></p>
             </div>
 
             <div class="profile-status">
                 <div class="posts-count">
-                    <span class="stat-number">48</span>
+                    <span class="stat-number"></span>
                     <span class="stat-label">Posts</span>
                 </div>
                 <div class="followers-count">
-                    <span class="stat-number">99</span>
+                    <span class="stat-number"></span>
                     <span class="stat-label">Followers</span>
                 </div>
                 <div class="following-count">
-                    <span class="stat-number">68</span>
+                    <span class="stat-number"></span>
                     <span class="stat-label">Following</span>
                 </div>
             </div>
         </section>
 
         <section class="posts-container">
-            <div class="post-container">
-                <div class="post-header">
-                    <div class="avatar">
-                        <img src="../assets/images/avatar.png" alt="">
-                    </div>
-                    <div class="post-author">
-                        <h4>Jane</h4>
-                        <span class="post-date">04.11.2026</span>
-                    </div>
-    
-                    <button class="delete-post">Delete</button>
-                </div>
-                <div class="post-content">
-                    <div class="post-img">
-                        <img src="../assets/images/robot.jpg" alt="Robot performing ordinary human job.">
-                    </div>
-                    <h4 class="post-title">This is how I spend my afternoon</h4>
-                    <p>I am not a robot. Ha ha haa..😅</p>
-                </div>
-                <div class="post-actions">
-                    <div class="post-actions-left">
-                        <a href="../post/index.html" class="view-post">
-                            <img src="../assets/icon/eye.png" alt="">
-                        </a>
-                        <button type="button" class="edit-btn">
-                            <img src="../assets/icon/edit.png" alt="">
-                        </button>
-                    </div>
-                    <div class="post-actions-right">
-                        <button type="button" class="like-btn">
-                            <img src="../assets/icon/heart.png" alt="">
-                            <p class="action-count-like">105</p>
-                        </button>
-                        <button type="button" class="comment-btn">
-                            <img src="../assets/icon/comment.png" alt="">
-                            <p class="action-count-comment">105</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="comment-post" hidden>
-                    <form class="write-comment">
-                        <input type="text" name="comment" placeholder="Write a comment..." aria-label="Write a comment">
-    
-                    </form>
-                    <button class="post-btn">Post</button>
-                </div>
-            </div>
-            <div class="post-container">
-                <div class="post-header">
-                    <div class="avatar">
-                        <img src="../assets/images/avatar.png" alt="">
-                    </div>
-                    <div class="post-author">
-                        <h4>Jane</h4>
-                        <span class="post-date">04.11.2026</span>
-                    </div>
-    
-                    <button class="delete-post">Delete</button>
-                </div>
-                <div class="post-content">
-                    <h4 class="post-title">Working with my web application</h4>
-                    <p>I wish the job is done already. Lorem ...something.</p>
-                </div>
-                <div class="post-actions">
-                    <div class="post-actions-left">
-                        <a href="../post/index.html" class="view-post">
-                            <img src="../assets/icon/eye.png" alt="">
-                        </a>
-                        <button type="button" class="edit-btn">
-                            <img src="../assets/icon/edit.png" alt="">
-                        </button>
-                    </div>
-                    <div class="post-actions-right">
-                        <button type="button" class="like-btn">
-                            <img src="../assets/icon/heart.png" alt="">
-                            <p class="action-count-like">105</p>
-                        </button>
-                        <button type="button" class="comment-btn">
-                            <img src="../assets/icon/comment.png" alt="">
-                            <p class="action-count-comment">105</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="comment-post" hidden>
-                    <form class="write-comment">
-                        <input type="text" name="comment" placeholder="Write a comment..." aria-label="Write a comment">
-    
-                    </form>
-                    <button class="post-btn">Post</button>
-                </div>
-            </div>
+            
         </section>
 
     </main>
@@ -177,6 +96,7 @@
         </div>
         <div class="copyright">&copy; 2026 soSocial.</div>
     </footer>
+    <script type="module" src="../js/pages/profile.js"></script>
 </body>
 
 </html>

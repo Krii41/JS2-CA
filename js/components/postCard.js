@@ -17,9 +17,11 @@ export function createPostCard(post, isSinglePost = false) {
 }
 
 // help with ai to figure out the file path
-const assetsPath = window.location.pathname.includes("/post/")
-    ? "../assets/icon/"
-    : "assets/icon/";
+const assetsPath =
+    window.location.pathname.includes("/post/") ||
+        window.location.pathname.includes("/profile")
+        ? "../assets/icon/"
+        : "assets/icon/";
 
 function createPostHeader(post) {
     const loggedInUser = localStorage.getItem("username");
@@ -42,11 +44,25 @@ function createPostHeader(post) {
     const authorName = document.createElement("h4");
     authorName.textContent = post.author?.name || "Unknown user";
 
+    const authorLink = document.createElement("a");
+
+    const profilePath =
+        window.location.pathname.includes("/profile/") ||
+            window.location.pathname.includes("/post/")
+            ? "../profile/index.html"
+            : "profile/index.html";
+
+    if (post.author?.name) {
+        authorLink.href = `${profilePath}?name=${encodeURIComponent(post.author.name)}`;
+    }
+
+    authorLink.appendChild(authorName);
+
     const postDate = document.createElement("span");
     postDate.classList.add("post-date");
     postDate.textContent = new Date(post.created).toLocaleDateString("en-GB");
 
-    postAuthor.append(authorName, postDate);
+    postAuthor.append(authorLink, postDate);
 
     const deleteBtn = document.createElement("button");
     deleteBtn.classList.add("delete-post");
@@ -125,7 +141,12 @@ function createPostActions(post, isSinglePost) {
 
     const viewPost = document.createElement("a");
     viewPost.classList.add("view-post");
-    viewPost.href = `post/index.html?id=${post.id}`;
+    const postPagePath =
+        window.location.pathname.includes("/profile/")
+            ? "../post/index.html"
+            : "post/index.html";
+
+    viewPost.href = `${postPagePath}?id=${post.id}`;
 
     const viewIcon = document.createElement("img");
     viewIcon.src = "assets/icon/eye.png";
@@ -155,7 +176,7 @@ function createPostActions(post, isSinglePost) {
 
     editBtn.addEventListener("click", () => {
         const postCard = editBtn.closest(".post-container");
-        
+
         const title = postCard.querySelector(".post-title");
         const body = postCard.querySelector(".post-body");
 
@@ -190,7 +211,7 @@ function createPostActions(post, isSinglePost) {
                         url: imageInput.value.trim(),
                         alt: title.textContent.trim(),
                     }
-                : null,    
+                    : null,
             };
 
             try {
@@ -198,7 +219,7 @@ function createPostActions(post, isSinglePost) {
 
                 title.contentEditable = "false";
                 body.contentEditable = "false";
-                
+
                 imageInput.remove();
                 saveBtn.remove();
                 editBtn.hidden = false;
@@ -234,9 +255,9 @@ function createPostActions(post, isSinglePost) {
             const totalReactions = result.reactions.reduce(
                 (total, reaction) => total + reaction.count,
                 0
-              );
-            
-              console.log("Reaction result:", result);
+            );
+
+            console.log("Reaction result:", result);
             likeCount.textContent = totalReactions;
         } catch (error) {
             console.error(error);
