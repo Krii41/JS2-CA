@@ -15,8 +15,7 @@ async function registerFormSubmit(e) {
     }
 
     delete formFields.confirmPassword;
-    
-    // this try catch is from ai
+
     try {
         await registerUser(formFields);
         window.location.href = "../login/index.html";

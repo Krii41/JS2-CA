@@ -34,11 +34,9 @@
             </button>
         </nav>
     </header>
-
     <main>
         <h1>Feed</h1>
-
-        <section class="create-post">
+        <section class="create-post" hidden>
             <div class="post-header">
                 <div class="avatar">
                     <img src="assets/images/avatar.png" alt="">
@@ -51,25 +49,15 @@
             <form class="new-post-form">
                 <label for="post-image"></label>
                 <input type="url" id="post-image" name="media" placeholder="https://example.com/image.jpg" />
-
                 <label for="post-title"></label>
                 <input type="text" id="post-title" name="title" placeholder="Maybe title..." aria-label="Write a title">
-
                 <label for="post-body"></label>
                 <textarea id="post-body" name="body" placeholder="What's on your mind?" rows="4"></textarea>
-
                 <button type="submit" class="post-btn">Post</button>
             </form>
         </section>
-
         <section class="posts-container" id="posts-container"></section>
-
-        <div class="post-container" id="post-container"></div>
-
-
-
     </main>
-
     <footer>
         <div class="footer-slogan">
             <i class="fa-vellum fa-solid fa-mug"></i>

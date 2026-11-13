@@ -1,7 +1,7 @@
 import { setupNavigation } from "../components/navigation.js";
+import { getAccessToken } from "../utils/storage.js";
 import { createPostCard } from "../components/postCard.js";
 import { fetchPosts } from "../api/posts.js";
-import { getAccessToken } from "../utils/storage.js";
 import { createPost } from "../api/posts.js";
 import { fetchPostById } from "../api/posts.js";
 
@@ -22,7 +22,7 @@ function renderPosts(posts) {
         const noPosts = document.createElement("p");
         noPosts.classList.add("no-posts");
         noPosts.textContent = "No posts found. Try another search!";
-    
+
         postsContainer.appendChild(noPosts);
         return;
     }
@@ -57,6 +57,25 @@ searchToggle.addEventListener("click", () => {
 })
 
 async function main() {
+    const token = getAccessToken("accessToken");
+
+    if (!token) {
+        document.querySelector(".create-post").hidden = true;
+
+        const loginMessage = document.createElement("p");
+
+        loginMessage.textContent =
+            "Log in to explore the latest posts and join the conversation!";
+
+        loginMessage.classList.add("login-message");
+
+        postsContainer.appendChild(loginMessage);
+
+        return;
+    }
+
+    document.querySelector(".create-post").hidden = false;
+
     try {
         allPosts = await fetchPosts();
 
@@ -67,7 +86,7 @@ async function main() {
 
         const errorMessage = document.createElement("p");
         errorMessage.classList.add("post-container", "error-message");
-        errorMessage.textContent = "Unable to load posts. Please try again later...";
+        errorMessage.textContent = "Oops! Something went wrong while loading posts. Please try again.";
 
         postsContainer.appendChild(errorMessage);
     }

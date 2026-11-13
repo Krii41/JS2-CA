@@ -25,28 +25,28 @@ async function fetchSinglePost() {
 
         singlePostContainer.appendChild(postCard);
 
-        
+
 
         const comments = post.comments ?? [];
 
         comments.sort((a, b) => {
             return new Date(b.created) - new Date(a.created);
-          });
+        });
 
         if (comments.length === 0) {
             noComments.hidden = false;
-          } else {
+        } else {
             comments.forEach((comment) => {
-              const commentCard = createCommentCard(comment);
-              commentsList.appendChild(commentCard);
+                const commentCard = createCommentCard(comment);
+                commentsList.appendChild(commentCard);
             });
-          }
+        }
 
     } catch (error) {
         console.error(error);
 
         const errorMessage = document.createElement("p");
-        errorMessage.classList.add("post-container","error-message");
+        errorMessage.classList.add("post-container", "error-message");
         errorMessage.textContent = "Unable to load this post. Please try again later...";
 
         singlePostContainer.appendChild(errorMessage);

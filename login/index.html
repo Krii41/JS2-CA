@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,25 +10,16 @@
     <link rel="stylesheet" href="../css/style.css">
     <title>Login | soSocial</title>
 </head>
+
 <body>
     <header>
         <div class="logo">soSocial.</div>
         <nav>
             <div class="search">
-                <input 
-                type="search"
-                id="search-input"
-                placeholder="Search posts..."
-                aria-label="Search posts"
-                >
-                <button
-                type="button"
-                class="search-toggle"
-                aria-label="Open search"
-                aria-expanded="false"
-                aria-controls="search-input"
-                >
-                <i class="fa-vellum fa-solid fa-magnifying-glass"></i>
+                <input type="search" id="search-input" placeholder="Search posts..." aria-label="Search posts">
+                <button type="button" class="search-toggle" aria-label="Open search" aria-expanded="false"
+                    aria-controls="search-input">
+                    <i class="fa-vellum fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
             <a href="../index.html"><i class="fa-vellum fa-solid fa-house"></i></a>
@@ -39,7 +31,6 @@
             </a>
         </nav>
     </header>
-
     <main>
         <div class="form-container">
             <h1>Login</h1>
@@ -48,14 +39,13 @@
                 <input type="text" id="email" name="email" placeholder="example@gmail.com" required>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="password" required>
-                <button type="submit" class="form-btn" id="form-btn" aria-label="Login">Login</button>   
+                <button type="submit" class="form-btn" id="form-btn" aria-label="Login">Login</button>
             </form>
             <p class="page-switch">New around here?
                 <a href="../register/index.html" class="link-btn">Join us</a>
             </p>
         </div>
     </main>
-
     <footer>
         <div class="footer-slogan">
             <i class="fa-vellum fa-solid fa-mug"></i>
@@ -65,4 +55,5 @@
     </footer>
     <script type="module" src="../js/pages/login.js"></script>
 </body>
+
 </html>

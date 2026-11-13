@@ -10,9 +10,11 @@ export function setupNavigation() {
 
     loginLink.hidden = Boolean(token);
     profileLink.hidden = !token;
-    logoutBtn.hidden = !token;
-
-    logoutBtn.addEventListener("click", handleLogout);
+    
+    if (logoutBtn) {
+        logoutBtn.hidden = !token;
+        logoutBtn.addEventListener("click", handleLogout);
+    }
 }
 
 function handleLogout() {

@@ -2,6 +2,8 @@ import { loginUser } from "../api/login.js";
 import { saveAccessToken } from "../utils/storage.js";
 import { setupNavigation } from "../components/navigation.js";
 
+setupNavigation();
+
 const loginForm = document.querySelector("#login-form");
 
 async function loginFormSubmit(e) {
@@ -25,6 +27,6 @@ async function loginFormSubmit(e) {
 
 loginForm.addEventListener("submit", loginFormSubmit);
 
-setupNavigation();
+
 
 

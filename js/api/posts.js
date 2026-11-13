@@ -27,18 +27,17 @@ export async function fetchPosts() {
     return result.data;
 }
 
-// help with ai
 export async function fetchPostById(id) {
     const accessToken = getAccessToken("accessToken");
 
-    const response = await fetch (
+    const response = await fetch(
         `${BASE_URL}/social/posts/${id}?_author=true&_comments=true&_reactions=true`,
         {
             headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "X-Noroff-API-Key": NOROFF_API_KEY,
+                Authorization: `Bearer ${accessToken}`,
+                "X-Noroff-API-Key": NOROFF_API_KEY,
             },
-          }
+        }
     );
 
     const result = await response.json();
@@ -53,16 +52,16 @@ export async function fetchPostById(id) {
 export async function createPost(postData) {
     const accessToken = getAccessToken("accessToken");
 
-    const response = await fetch(`${BASE_URL}/social/posts`, 
-    { 
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "X-Noroff-API-Key": NOROFF_API_KEY,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-    });
+    const response = await fetch(`${BASE_URL}/social/posts`,
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                "X-Noroff-API-Key": NOROFF_API_KEY,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(postData),
+        });
 
     const result = await response.json();
 
@@ -77,16 +76,16 @@ export async function createPost(postData) {
 export async function editPost(postId, postData) {
     const accessToken = getAccessToken("accessToken");
 
-    const response = await fetch(`${BASE_URL}/social/posts/${postId}`, 
-    {
-        method: "PUT",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "X-Noroff-API-Key": NOROFF_API_KEY,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-    });
+    const response = await fetch(`${BASE_URL}/social/posts/${postId}`,
+        {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                "X-Noroff-API-Key": NOROFF_API_KEY,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(postData),
+        });
 
     const result = await response.json();
 
@@ -100,14 +99,14 @@ export async function editPost(postId, postData) {
 export async function deletePost(postId) {
     const accessToken = getAccessToken("accessToken");
 
-    const response = await fetch(`${BASE_URL}/social/posts/${postId}`, 
-    {
-        method: "DELETE",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "X-Noroff-API-Key": NOROFF_API_KEY,
-        },
-    });
+    const response = await fetch(`${BASE_URL}/social/posts/${postId}`,
+        {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                "X-Noroff-API-Key": NOROFF_API_KEY,
+            },
+        });
 
     if (!response.ok) {
         throw new Error("Unable to delete post");
@@ -117,16 +116,16 @@ export async function deletePost(postId) {
 export async function createComment(postId, commentData) {
     const accessToken = getAccessToken("accessToken");
 
-    const response = await fetch(`${BASE_URL}/social/posts/${postId}/comment`, 
-    { 
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "X-Noroff-API-Key": NOROFF_API_KEY,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(commentData),
-    });
+    const response = await fetch(`${BASE_URL}/social/posts/${postId}/comment`,
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                "X-Noroff-API-Key": NOROFF_API_KEY,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(commentData),
+        });
 
     const result = await response.json();
 
@@ -141,14 +140,14 @@ export async function createComment(postId, commentData) {
 export async function reactToPost(postId, symbol) {
     const accessToken = getAccessToken("accessToken");
 
-    const response = await fetch(`${BASE_URL}/social/posts/${postId}/react/${encodeURIComponent(symbol)}`, 
-    {
-        method: "PUT",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "X-Noroff-API-Key": NOROFF_API_KEY,
-        },
-    });
+    const response = await fetch(`${BASE_URL}/social/posts/${postId}/react/${encodeURIComponent(symbol)}`,
+        {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                "X-Noroff-API-Key": NOROFF_API_KEY,
+            },
+        });
 
     const result = await response.json();
 

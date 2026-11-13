@@ -16,7 +16,6 @@ export function createPostCard(post, isSinglePost = false) {
     return postContainer;
 }
 
-// help with ai to figure out the file path
 const assetsPath =
     window.location.pathname.includes("/post/") ||
         window.location.pathname.includes("/profile")
@@ -64,34 +63,12 @@ function createPostHeader(post) {
 
     postAuthor.append(authorLink, postDate);
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.classList.add("delete-post");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.type = "button";
-
     postHeader.append(avatar, postAuthor);
 
+
     if (loggedInUser && loggedInUser === post.author?.name) {
-        postHeader.appendChild(deleteBtn);
+        postHeader.appendChild(createDeleteButton(post));
     }
-
-    deleteBtn.addEventListener("click", async () => {
-        const confirmed = confirm("Are you sure?");
-
-        if (!confirmed) return;
-
-        try {
-            await deletePost(post.id);
-
-            const postCard = deleteBtn.closest(".post-container");
-            postCard.remove();
-
-            alert("Post deleted!");
-        } catch (error) {
-            console.error(error);
-            alert("Unable to delete post.")
-        }
-    });
 
     return postHeader;
 }
@@ -139,6 +116,33 @@ function createPostActions(post, isSinglePost) {
     const postActionsRight = document.createElement("div");
     postActionsRight.classList.add("post-actions-right");
 
+    const viewPost = createViewButton(post);
+    // edit button
+    const editBtn = createEditButton(post);
+
+    if (!isSinglePost) {
+        postActionsLeft.appendChild(viewPost);
+    }
+
+    if (isOwner) {
+        postActionsLeft.appendChild(editBtn);
+    }
+
+
+
+    const likeBtn = createLikeButton(post);
+
+    // comment btn
+    const commentBtn = createCommentButton(post, isSinglePost);
+
+    postActionsRight.append(likeBtn, commentBtn);
+
+    postActions.append(postActionsLeft, postActionsRight);
+
+    return postActions;
+}
+
+function createViewButton(post) {
     const viewPost = document.createElement("a");
     viewPost.classList.add("view-post");
     const postPagePath =
@@ -155,6 +159,81 @@ function createPostActions(post, isSinglePost) {
 
     viewPost.appendChild(viewIcon);
 
+    return viewPost;
+}
+
+function createLikeButton(post) {
+    const likeBtn = document.createElement("button");
+    likeBtn.classList.add("like-btn");
+    likeBtn.type = "button";
+
+    const likeIcon = document.createElement("img");
+    likeIcon.src = "assets/icon/heart.png";
+    likeIcon.alt = "";
+    likeIcon.src = `${assetsPath}heart.png`;
+
+    const likeCount = document.createElement("p");
+    likeCount.classList.add("action-count-like");
+    likeCount.textContent = post._count?.reactions ?? 0;
+
+    likeBtn.append(likeIcon, likeCount);
+    likeBtn.setAttribute("aria-label", "React to post");
+
+    likeBtn.addEventListener("click", async () => {
+        try {
+            const result = await reactToPost(post.id, "❤️")
+
+            const totalReactions = result.reactions.reduce(
+                (total, reaction) => total + reaction.count,
+                0
+            );
+
+            console.log("Reaction result:", result);
+            likeCount.textContent = totalReactions;
+        } catch (error) {
+            console.error(error);
+            alert("Unable to like post.");
+        }
+    })
+
+    return likeBtn;
+}
+
+function createCommentButton(post, isSinglePost) {
+    const commentBtn = document.createElement("button");
+    commentBtn.classList.add("comment-btn");
+    commentBtn.type = "button";
+
+    const commentIcon = document.createElement("img");
+    commentIcon.src = "assets/icon/comment.png";
+    commentIcon.alt = "";
+    commentIcon.src = `${assetsPath}comment.png`;
+
+    const commentCount = document.createElement("p");
+    commentCount.classList.add("action-count-comment");
+    commentCount.textContent = post._count?.comments ?? 0;
+
+    commentBtn.append(commentIcon, commentCount);
+    commentBtn.setAttribute("aria-label", "Comment on post");
+
+    const postPagePath =
+        window.location.pathname.includes("/profile/") ||
+            window.location.pathname.includes("/post/")
+            ? "../post/index.html"
+            : "post/index.html";
+
+    commentBtn.addEventListener("click", () => {
+        if (!isSinglePost) {
+            window.location.href = `${postPagePath}?id=${post.id}`;
+        } else {
+            document.querySelector("#comment-body")?.focus();
+        }
+    });
+
+    return commentBtn;
+}
+
+function createEditButton(post) {
     const editBtn = document.createElement("button");
     editBtn.classList.add("edit-btn");
     editBtn.type = "button";
@@ -165,14 +244,6 @@ function createPostActions(post, isSinglePost) {
     editIcon.src = `${assetsPath}edit.png`;
 
     editBtn.appendChild(editIcon);
-
-    if (!isSinglePost) {
-        postActionsLeft.appendChild(viewPost);
-    }
-
-    if (isOwner) {
-        postActionsLeft.appendChild(editBtn);
-    }
 
     editBtn.addEventListener("click", () => {
         const postCard = editBtn.closest(".post-container");
@@ -231,67 +302,32 @@ function createPostActions(post, isSinglePost) {
             }
         });
     })
+    return editBtn;
+}
 
-    const likeBtn = document.createElement("button");
-    likeBtn.classList.add("like-btn");
-    likeBtn.type = "button";
+function createDeleteButton(post) {
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("delete-post");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.type = "button";
 
-    const likeIcon = document.createElement("img");
-    likeIcon.src = "assets/icon/heart.png";
-    likeIcon.alt = "";
-    likeIcon.src = `${assetsPath}heart.png`;
+    deleteBtn.addEventListener("click", async () => {
+        const confirmed = confirm("Are you sure?");
 
-    const likeCount = document.createElement("p");
-    likeCount.classList.add("action-count-like");
-    likeCount.textContent = post._count?.reactions ?? 0;
+        if (!confirmed) return;
 
-    likeBtn.append(likeIcon, likeCount);
-    likeBtn.setAttribute("aria-label", "React to post");
-
-    likeBtn.addEventListener("click", async () => {
         try {
-            const result = await reactToPost(post.id, "❤️")
+            await deletePost(post.id);
 
-            const totalReactions = result.reactions.reduce(
-                (total, reaction) => total + reaction.count,
-                0
-            );
+            const postCard = deleteBtn.closest(".post-container");
+            postCard.remove();
 
-            console.log("Reaction result:", result);
-            likeCount.textContent = totalReactions;
+            alert("Post deleted!");
         } catch (error) {
             console.error(error);
-            alert("Unable to like post.");
-        }
-    })
-
-    const commentBtn = document.createElement("button");
-    commentBtn.classList.add("comment-btn");
-    commentBtn.type = "button";
-
-    const commentIcon = document.createElement("img");
-    commentIcon.src = "assets/icon/comment.png";
-    commentIcon.alt = "";
-    commentIcon.src = `${assetsPath}comment.png`;
-
-    const commentCount = document.createElement("p");
-    commentCount.classList.add("action-count-comment");
-    commentCount.textContent = post._count?.comments ?? 0;
-
-    commentBtn.append(commentIcon, commentCount);
-    commentBtn.setAttribute("aria-label", "Comment on post");
-
-    commentBtn.addEventListener("click", () => {
-        if (!isSinglePost) {
-            window.location.href = `post/index.html?id=${post.id}`;
-        } else {
-            document.querySelector("comment-body").focus();
+            alert("Unable to delete post.")
         }
     });
 
-    postActionsRight.append(likeBtn, commentBtn);
-
-    postActions.append(postActionsLeft, postActionsRight);
-
-    return postActions;
+    return deleteBtn;
 }

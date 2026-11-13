@@ -16,20 +16,10 @@
         <div class="logo">soSocial.</div>
         <nav>
             <div class="search">
-                <input 
-                type="search"
-                id="search-input"
-                placeholder="Search posts..."
-                aria-label="Search posts"
-                >
-                <button
-                type="button"
-                class="search-toggle"
-                aria-label="Open search"
-                aria-expanded="false"
-                aria-controls="search-input"
-                >
-                <i class="fa-vellum fa-solid fa-magnifying-glass"></i>
+                <input type="search" id="search-input" placeholder="Search posts..." aria-label="Search posts">
+                <button type="button" class="search-toggle" aria-label="Open search" aria-expanded="false"
+                    aria-controls="search-input">
+                    <i class="fa-vellum fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
             <a href="../index.html"><i class="fa-vellum fa-solid fa-house"></i></a>
@@ -44,7 +34,6 @@
             </button>
         </nav>
     </header>
-
     <main>
         <div class="return-container">
             <a href="../index.html" class="return-to-feed">
@@ -52,30 +41,19 @@
                 <p>Back to Feed</p>
             </a>
         </div>
-        
+
         <div id="single-post-container"></div>
-            <span class="comments-title">Comments</span>
+        <span class="comments-title">Comments</span>
+        <p class="no-comments" hidden>It's a little quiet here... Be the first to comment!</p>
+        <section class="comments-list">
 
-            
-
-            <p class="no-comments" hidden>It's a little quiet here... Be the first to comment!</p>
-            <section class="comments-list">
-
-                <form id="comment-form" class="comment-form">
-                    <label for="comment-body">Write a comment</label>
-                    <textarea
-                      id="comment-body"
-                      name="body"
-                      placeholder="Write your comment..."
-                      required
-                    ></textarea>
-                  
-                    <button type="submit">Comment</button>
-                  </form>
-                
-            </section>
+            <form id="comment-form" class="comment-form">
+                <label for="comment-body">Write a comment</label>
+                <textarea id="comment-body" name="body" placeholder="Write your comment..." required></textarea>
+                <button type="submit">Comment</button>
+            </form>
+        </section>
     </main>
-
     <footer>
         <div class="footer-slogan">
             <i class="fa-vellum fa-solid fa-mug"></i>
