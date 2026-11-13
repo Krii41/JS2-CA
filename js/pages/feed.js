@@ -9,16 +9,59 @@ setupNavigation();
 
 const postsContainer = document.getElementById("posts-container");
 const createPostForm = document.querySelector(".new-post-form");
-const token = getAccessToken("accessToken");
+const searchInput = document.querySelector("#search-input");
+const searchContainer = document.querySelector(".search");
+const searchToggle = document.querySelector(".search-toggle");
+
+let allPosts = [];
+
+function renderPosts(posts) {
+    postsContainer.innerHTML = "";
+
+    if (posts.length === 0) {
+        const noPosts = document.createElement("p");
+        noPosts.classList.add("no-posts");
+        noPosts.textContent = "No posts found. Try another search!";
+    
+        postsContainer.appendChild(noPosts);
+        return;
+    }
+
+    posts.forEach((post) => {
+        const postCard = createPostCard(post);
+        postsContainer.appendChild(postCard);
+    })
+}
+
+searchInput.addEventListener("input", (e) => {
+    const searchTerm = e.target.value.toLowerCase().trim();
+
+    const filteredPosts = allPosts.filter((post) => {
+        const title = (post.title || "").toLowerCase();
+        const body = (post.body || "").toLowerCase();
+
+        return title.includes(searchTerm) || body.includes(searchTerm);
+    });
+
+    renderPosts(filteredPosts);
+})
+
+searchToggle.addEventListener("click", () => {
+    const isActive = searchContainer.classList.toggle("active");
+
+    searchToggle.setAttribute("aria-expanded", isActive);
+
+    if (isActive) {
+        searchInput.focus();
+    }
+})
 
 async function main() {
     try {
-        const posts = await fetchPosts();
+        allPosts = await fetchPosts();
 
-        posts.forEach((post) => {
-            const postCard = createPostCard(post);
-            postsContainer.appendChild(postCard);
-        });
+        renderPosts(allPosts);
+
     } catch (error) {
         console.error(error);
 
@@ -64,3 +107,4 @@ async function handleCreatePost(e) {
 }
 
 createPostForm.addEventListener("submit", handleCreatePost);
+

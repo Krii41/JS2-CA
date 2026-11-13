@@ -1,4 +1,6 @@
 import { editPost } from "../api/posts.js";
+import { deletePost } from "../api/posts.js";
+import { reactToPost } from "../api/posts.js";
 
 export function createPostCard(post, isSinglePost = false) {
     const postContainer = document.createElement("div");
@@ -56,6 +58,24 @@ function createPostHeader(post) {
     if (loggedInUser && loggedInUser === post.author?.name) {
         postHeader.appendChild(deleteBtn);
     }
+
+    deleteBtn.addEventListener("click", async () => {
+        const confirmed = confirm("Are you sure?");
+
+        if (!confirmed) return;
+
+        try {
+            await deletePost(post.id);
+
+            const postCard = deleteBtn.closest(".post-container");
+            postCard.remove();
+
+            alert("Post deleted!");
+        } catch (error) {
+            console.error(error);
+            alert("Unable to delete post.")
+        }
+    });
 
     return postHeader;
 }
@@ -144,6 +164,15 @@ function createPostActions(post, isSinglePost) {
 
         title.focus();
 
+        const imageInput = document.createElement("input");
+
+        imageInput.type = "url";
+        imageInput.placeholder = "Image URL";
+        imageInput.value = post.media?.url || "";
+        imageInput.classList.add("edit-image-input");
+
+        body.after(imageInput);
+
         const saveBtn = document.createElement("button");
         saveBtn.type = "button";
         saveBtn.textContent = "Save";
@@ -156,6 +185,12 @@ function createPostActions(post, isSinglePost) {
             const updateData = {
                 title: title.textContent.trim(),
                 body: body.textContent.trim(),
+                media: imageInput.value.trim()
+                    ? {
+                        url: imageInput.value.trim(),
+                        alt: title.textContent.trim(),
+                    }
+                : null,    
             };
 
             try {
@@ -163,7 +198,8 @@ function createPostActions(post, isSinglePost) {
 
                 title.contentEditable = "false";
                 body.contentEditable = "false";
-
+                
+                imageInput.remove();
                 saveBtn.remove();
                 editBtn.hidden = false;
 
@@ -191,6 +227,23 @@ function createPostActions(post, isSinglePost) {
     likeBtn.append(likeIcon, likeCount);
     likeBtn.setAttribute("aria-label", "React to post");
 
+    likeBtn.addEventListener("click", async () => {
+        try {
+            const result = await reactToPost(post.id, "❤️")
+
+            const totalReactions = result.reactions.reduce(
+                (total, reaction) => total + reaction.count,
+                0
+              );
+            
+              console.log("Reaction result:", result);
+            likeCount.textContent = totalReactions;
+        } catch (error) {
+            console.error(error);
+            alert("Unable to like post.");
+        }
+    })
+
     const commentBtn = document.createElement("button");
     commentBtn.classList.add("comment-btn");
     commentBtn.type = "button";
@@ -206,6 +259,14 @@ function createPostActions(post, isSinglePost) {
 
     commentBtn.append(commentIcon, commentCount);
     commentBtn.setAttribute("aria-label", "Comment on post");
+
+    commentBtn.addEventListener("click", () => {
+        if (!isSinglePost) {
+            window.location.href = `post/index.html?id=${post.id}`;
+        } else {
+            document.querySelector("comment-body").focus();
+        }
+    });
 
     postActionsRight.append(likeBtn, commentBtn);
 

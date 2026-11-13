@@ -96,3 +96,65 @@ export async function editPost(postId, postData) {
 
     return result.data;
 }
+
+export async function deletePost(postId) {
+    const accessToken = getAccessToken("accessToken");
+
+    const response = await fetch(`${BASE_URL}/social/posts/${postId}`, 
+    {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "X-Noroff-API-Key": NOROFF_API_KEY,
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error("Unable to delete post");
+    }
+}
+
+export async function createComment(postId, commentData) {
+    const accessToken = getAccessToken("accessToken");
+
+    const response = await fetch(`${BASE_URL}/social/posts/${postId}/comment`, 
+    { 
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "X-Noroff-API-Key": NOROFF_API_KEY,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(commentData),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(result.errors?.[0]?.message || "Unable to add comment");
+    }
+
+    return result.data;
+
+}
+
+export async function reactToPost(postId, symbol) {
+    const accessToken = getAccessToken("accessToken");
+
+    const response = await fetch(`${BASE_URL}/social/posts/${postId}/react/${encodeURIComponent(symbol)}`, 
+    {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "X-Noroff-API-Key": NOROFF_API_KEY,
+        },
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(result.errors?.[0]?.message || "Unable to react to popst");
+    }
+
+    return result.data;
+}

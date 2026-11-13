@@ -54,58 +54,24 @@
         </div>
         
         <div id="single-post-container"></div>
-       <!--  <div class="post-container">
-            <div class="post-header">
-                <div class="avatar">
-                    <img src="../assets/images/avatar.png" alt="">
-                </div>
-                <div class="post-author">
-                    <h4>Jane</h4>
-                    <span class="post-date">04.11.2026</span>
-                </div>
-
-                <button class="delete-post">Delete</button>
-            </div>
-            <div class="post-content">
-                <div class="post-img">
-                    <img src="../assets/images/robot.jpg" alt="Robot performing ordinary human job.">
-                </div>
-                <h4 class="post-title">This is how I spend my afternoon</h4>
-                <p class="post-body">I am not a robot. Ha ha haa..😅</p>
-            </div>
-            <div class="post-actions">
-                <div class="post-actions-left">
-                    <a href="post/index.html" class="view-post">
-                        <img src="../assets/icon/eye.png" alt="">
-                    </a>
-                    <button type="button" class="edit-btn">
-                        <img src="../assets/icon/edit.png" alt="">
-                    </button>
-                </div>
-                <div class="post-actions-right">
-                    <button type="button" class="like-btn">
-                        <img src="../assets/icon/heart.png" alt="">
-                        <p class="action-count-like">105</p>
-                    </button>
-                    <button type="button" class="comment-btn">
-                        <img src="../assets/icon/comment.png" alt="">
-                        <p class="action-count-comment">105</p>
-                    </button>
-                </div>
-            </div>
-            <div class="comment-post">
-                <form class="write-comment">
-                    <input type="text" name="comment" placeholder="Write a comment..." aria-label="Write a comment">
-
-                </form>
-                <button class="post-btn">Post</button>
-            </div>
-        </div>
-
-    -->
             <span class="comments-title">Comments</span>
+
+            
+
             <p class="no-comments" hidden>It's a little quiet here... Be the first to comment!</p>
             <section class="comments-list">
+
+                <form id="comment-form" class="comment-form">
+                    <label for="comment-body">Write a comment</label>
+                    <textarea
+                      id="comment-body"
+                      name="body"
+                      placeholder="Write your comment..."
+                      required
+                    ></textarea>
+                  
+                    <button type="submit" class="comment-btn">Comment</button>
+                  </form>
                 
             </section>
     </main>

@@ -2,16 +2,20 @@ import { setupNavigation } from "../components/navigation.js";
 import { fetchPostById } from "../api/posts.js";
 import { createPostCard } from "../components/postCard.js";
 import { createCommentCard } from "../components/commentCard.js";
+import { createComment } from "../api/posts.js";
 
 setupNavigation();
 
+const params = new URLSearchParams(window.location.search);
+const postId = params.get("id");
+
 const singlePostContainer = document.getElementById("single-post-container");
+const commentForm = document.querySelector("#comment-form");
+const commentsList = document.querySelector(".comments-list");
+const noComments = document.querySelector(".no-comments");
 
 async function fetchSinglePost() {
     try {
-        const params = new URLSearchParams(window.location.search);
-        const postId = params.get("id");
-
         if (!postId) {
             throw new Error("Post ID is missing");
         }
@@ -22,23 +26,19 @@ async function fetchSinglePost() {
         singlePostContainer.appendChild(postCard);
 
         
-        const noComments = document.querySelector(".no-comments");
 
         const comments = post.comments ?? [];
 
         if (comments.length === 0) {
             noComments.hidden = false;
-        } else {
+          } else {
             comments.forEach((comment) => {
-                const commentsList = document.querySelector(".comments-list");
-                const commentCard = createCommentCard(comment);
-                commentsList.appendChild(commentCard);
+              const commentCard = createCommentCard(comment);
+              commentsList.appendChild(commentCard);
             });
-        }   
+          }
 
     } catch (error) {
-        console.error(error);
-
         console.error(error);
 
         const errorMessage = document.createElement("p");
@@ -50,3 +50,20 @@ async function fetchSinglePost() {
 }
 
 fetchSinglePost();
+
+commentForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(commentForm);
+    const commentData = Object.fromEntries(formData);
+
+    try {
+        await createComment(postId, commentData);
+
+        commentForm.reset();
+        window.location.reload();
+    } catch (error) {
+        console.error(error);
+        alert("Unable to publish comment.");
+    }
+})
