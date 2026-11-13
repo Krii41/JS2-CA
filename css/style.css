@@ -231,7 +231,7 @@ main {
     height: auto;
 }
 
-.comment-btn,
+.comment-form button,
 .follow-btn,
 .post-btn {
     font-family: var(--font-main);
@@ -243,7 +243,7 @@ main {
     transition-duration: var(--transition);
 }
 
-.comment-btn,
+.comment-form button,
 .post-btn {
     background-color: var(--accent-color);
     color: var(--primary-color);
@@ -255,7 +255,7 @@ main {
     color: #270c42;
 }
 
-.comment-btn:hover,
+
 .follow-btn:hover,
 .post-btn:hover {
     background-color: var(--secondary-color);

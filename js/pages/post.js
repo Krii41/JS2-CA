@@ -29,6 +29,10 @@ async function fetchSinglePost() {
 
         const comments = post.comments ?? [];
 
+        comments.sort((a, b) => {
+            return new Date(b.created) - new Date(a.created);
+          });
+
         if (comments.length === 0) {
             noComments.hidden = false;
           } else {
