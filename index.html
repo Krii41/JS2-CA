@@ -22,11 +22,11 @@
                     <i class="fa-vellum fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
-            <a href="./index.html"><i class="fa-vellum fa-solid fa-house" aria-label="Go to feed"></i></a>
-            <a href="login/index.html" id="login-link">
+            <a href="./index.html" aria-label="Go to feed"><i class="fa-vellum fa-solid fa-house"></i></a>
+            <a href="login/index.html" id="login-link" aria-label="Log in">
                 <i class="fa-vellum fa-solid fa-circle-user"></i>
             </a>
-            <a href="profile/index.html" id="profile-link" aria-label="View profile" hidden>
+            <a href="profile/index.html" aria-label="View profile" id="profile-link"  hidden>
                 <i class="fa-vellum fa-solid fa-user"></i>
             </a>
             <button type="button" class="logout-btn" id="logout-btn" aria-label="Log out" hidden>
@@ -47,11 +47,11 @@
                 </div>
             </div>
             <form class="new-post-form">
-                <label for="post-image"></label>
+                <label for="post-image" class="visually-hidden"></label>
                 <input type="url" id="post-image" name="media" placeholder="https://example.com/image.jpg" />
-                <label for="post-title"></label>
+                <label for="post-title" class="visually-hidden"></label>
                 <input type="text" id="post-title" name="title" placeholder="Maybe title..." aria-label="Write a title">
-                <label for="post-body"></label>
+                <label for="post-body" class="visually-hidden"></label>
                 <textarea id="post-body" name="body" placeholder="What's on your mind?" rows="4"></textarea>
                 <button type="submit" class="post-btn">Post</button>
             </form>
