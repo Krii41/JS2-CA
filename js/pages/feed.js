@@ -15,6 +15,13 @@ const searchToggle = document.querySelector(".search-toggle");
 
 let allPosts = [];
 
+/**
+ * Renders an array of post in the feed.
+ * 
+ * @param {Array<Object>} posts - The posts to display
+ * @returns {void}
+ */
+
 function renderPosts(posts) {
     postsContainer.innerHTML = "";
 
@@ -56,6 +63,14 @@ searchToggle.addEventListener("click", () => {
     }
 })
 
+/**
+ * Checks the users login status and displays the appropriate content.
+ * Fetches the posts for logged-in users.
+ * 
+ * @async
+ * @returns {Promise<void>}
+ */
+
 async function main() {
     const token = getAccessToken("accessToken");
 
@@ -76,6 +91,16 @@ async function main() {
 
     document.querySelector(".create-post").hidden = false;
 
+    const username = localStorage.getItem("username");
+
+    const usernameElement = document.querySelector(
+        ".create-post .post-author h4"
+    );
+
+    if (usernameElement && username) {
+        usernameElement.textContent = username;
+    }
+
     try {
         allPosts = await fetchPosts();
 
@@ -94,6 +119,14 @@ async function main() {
 
 main();
 
+/**
+ * Creates new post and shows alert message whether post is published or not.
+ * Collects form data and sends it to the API.
+ * 
+ * @async
+ * @param {SubmitEvent} e - Form submission event.
+ * @returns {Promise<void>}
+ */
 
 async function handleCreatePost(e) {
     e.preventDefault();

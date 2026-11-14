@@ -20,5 +20,6 @@ export function setupNavigation() {
 function handleLogout() {
     removeAccessToken();
     localStorage.removeItem("username");
-    window.location.href = "/login/index.html";
+    const feedUrl = new URL("../../index.html", import.meta.url);
+    window.location.href = feedUrl.href;
 }

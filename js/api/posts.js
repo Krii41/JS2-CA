@@ -6,6 +6,12 @@ const POSTS_URL = `${BASE_URL}/social/posts?_author=true`;
 
 const NOROFF_API_KEY = "22146ae1-9235-42a3-b8fa-1201b08208ce";
 
+/**
+ * Fetches all posts from API.
+ * 
+ * @async
+ * @returns {Promise<Object[]>} An array of post objects.
+ */
 export async function fetchPosts() {
     const accessToken = getAccessToken("accessToken");
 
@@ -27,6 +33,13 @@ export async function fetchPosts() {
     return result.data;
 }
 
+/**
+ * Fetches a single post by its ID from API.
+ * 
+ * @async
+ * @param {number} id - The ID of the post to fetch.
+ * @returns {Promise<Object>} Requested post data.
+ */
 export async function fetchPostById(id) {
     const accessToken = getAccessToken("accessToken");
 
@@ -49,6 +62,13 @@ export async function fetchPostById(id) {
     return result.data;
 }
 
+/**
+ * Sends new post data to API to create a post.
+ * 
+ * @async
+ * @param {Object} postData - The data for the new post.
+ * @returns {Promise<Object>} - The new post.
+ */
 export async function createPost(postData) {
     const accessToken = getAccessToken("accessToken");
 
@@ -73,6 +93,14 @@ export async function createPost(postData) {
 
 }
 
+/**
+ * Updates an existing post.
+ * 
+ * @async
+ * @param {number} postId - The ID of the post to update.
+ * @param {Object} postData - The updated post data.
+ * @returns {Promise<Object>} The updated post object.
+ */
 export async function editPost(postId, postData) {
     const accessToken = getAccessToken("accessToken");
 
@@ -96,6 +124,13 @@ export async function editPost(postId, postData) {
     return result.data;
 }
 
+/**
+ * Deletes the existing post from API
+ * 
+ * @async
+ * @param {number} postId - The ID of the post to be deleted.
+ * @returns {Promise<void>} Resolves when the post is deleted
+ */
 export async function deletePost(postId) {
     const accessToken = getAccessToken("accessToken");
 
@@ -113,6 +148,14 @@ export async function deletePost(postId) {
     }
 }
 
+/**
+ * Creates a new comment on a post using API.
+ * 
+ * @async
+ * @param {number} postId - The ID of the post to be comment on.
+ * @param {Object} commentData  - The comment data to submit.
+ * @returns {Promise<Object>}  The created comment data.
+ */
 export async function createComment(postId, commentData) {
     const accessToken = getAccessToken("accessToken");
 
@@ -137,6 +180,14 @@ export async function createComment(postId, commentData) {
 
 }
 
+/**
+ * Adds or removes an emoji reaction on a post.
+ * 
+ * @async
+ * @param {number} postId - The ID of the post to react to.. 
+ * @param {string} symbol -The emoji used for the reaction.
+ * @returns {Promise<Object>} The updated reaction data.
+ */
 export async function reactToPost(postId, symbol) {
     const accessToken = getAccessToken("accessToken");
 

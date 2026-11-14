@@ -2,6 +2,14 @@ import { editPost } from "../api/posts.js";
 import { deletePost } from "../api/posts.js";
 import { reactToPost } from "../api/posts.js";
 
+/**
+ * Creates a post card element for dispalying a post.
+ * 
+ * @param {Object} post - The post data.
+ * @param {Boolean} isSinglePost - Whether the post is displayed on its own page.
+ * @returns {HTMLElement} The created post card element.
+ */
+
 export function createPostCard(post, isSinglePost = false) {
     const postContainer = document.createElement("div");
     postContainer.classList.add("post-container");
